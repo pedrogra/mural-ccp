@@ -11,3 +11,18 @@ Then(/^I verify if the "([^"]*)" is visible$/, (_component) => {
 	cy.get(getComponentID(_component)).should('be.visible')
 });
 
+
+When(/^I navigate to "([^"]*)" then "([^"]*)"$/, (area,component) => {
+	cy.get('#components-'+area)
+		.invoke('attr', 'aria-expanded')
+		.then(expanded => {
+			cy.log(expanded)
+			if(expanded === false){
+				cy.get('#components-'+area).click()
+			}
+		})
+	cy.get('#components-'+area+'--'+component).click()
+});
+
+
+
